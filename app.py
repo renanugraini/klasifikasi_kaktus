@@ -228,6 +228,7 @@ else:
         c.drawString(320, height-360, f"Confidence : {conf_mnet:.2%}")
 
         c.setFont("Helvetica-Bold", 14)
+        best_model = "MobileNetV2" if conf_mnet > conf_cnn else "CNN"
         c.drawString(60, height-130, f"Kesimpulan: Model terbaik adalah {best_model}")
 
         c.setFont("Helvetica-Oblique", 9)
