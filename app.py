@@ -2,7 +2,7 @@ import streamlit as st
 import numpy as np
 import json
 from PIL import Image
-import tensorflow as tf
+import tflite_runtime.interpreter as tflite
 
 # =========================
 # Load Labels
@@ -14,7 +14,7 @@ with open("labels.json", "r") as f:
 # Load TFLite Models
 # =========================
 def load_tflite_model(model_path):
-    interpreter = tf.lite.Interpreter(model_path=model_path)
+    interpreter = tflite.Interpreter(model_path=model_path)
     interpreter.allocate_tensors()
     return interpreter
 
