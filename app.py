@@ -56,7 +56,7 @@ def load_model(path):
     interpreter.allocate_tensors()
     return interpreter
 
-cnn_interpreter = load_model("cnn_kaktus.tflite")
+cnn_interpreter = load_model("modelcnn_kaktus.tflite")
 mobilenet_interpreter = load_model("mobilenetv2_kaktus.tflite")
 
 labels = ["Astrophytum Asteria", "Ferocactus", "Gymnocalycium"]
