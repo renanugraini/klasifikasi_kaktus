@@ -71,7 +71,7 @@ def predict(img, interpreter, model_type="cnn"):
 
     # beda ukuran input
     if model_type == "cnn":
-    image = img.resize((150, 150))
+        image = img.resize((150, 150))
     else:  # mobilenet
         image = img.resize((224, 224))
         
