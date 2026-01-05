@@ -4,12 +4,6 @@ import numpy as np
 from PIL import Image
 import io
 import matplotlib.pyplot as plt
-import os
-
-BASE_DIR = os.path.dirname(os.path.abspath(__file__))
-
-cnn_interpreter = load_model(os.path.join(BASE_DIR, "cnn_kaktus.tflite"))
-mobilenet_interpreter = load_model(os.path.join(BASE_DIR, "mobilenetv2_kaktus.tflite"))
 
 
 # =========================================================
