@@ -65,21 +65,20 @@ labels = ["Astrophytum Asteria", "Ferocactus", "Gymnocalycium"]
 # =========================================================
 # PREDICTION FUNCTION
 # =========================================================
-def predict(img, interpreter, model_type="cnn"):
+def predict(img, interpreter):
     input_details = interpreter.get_input_details()
     output_details = interpreter.get_output_details()
 
-    # beda ukuran input
-    if model_type == "cnn":
-        image = img.resize((150, 150))
-    else:  # mobilenet
-        image = img.resize((224, 224))
-        
-    arr = arr = np.array(image).astype("float32") / 255.0
+    # ambil ukuran input dari model TFLite
+    _, height, width, _ = input_details[0]["shape"]
+
+    image = img.resize((width, height))
+    arr = np.array(image).astype("float32") / 255.0
     arr = np.expand_dims(arr, axis=0)
 
     interpreter.set_tensor(input_details[0]["index"], arr)
     interpreter.invoke()
+
     preds = interpreter.get_tensor(output_details[0]["index"])[0]
     return preds
 
@@ -116,12 +115,12 @@ else:
         st.image(img, width=280)
 
         # ===== PREDICTION =====
-        preds_cnn = predict(img, cnn_interpreter, "cnn")
+        preds_cnn = predict(img, cnn_interpreter)
         probs_cnn = preds_cnn / np.sum(preds_cnn)
         kelas_cnn = labels[np.argmax(probs_cnn)]
         conf_cnn = np.max(probs_cnn)
 
-        preds_mnet = predict(img, mobilenet_interpreter, "mobilenet")
+        preds_mnet = predict(img, mobilenet_interpreter)
         probs_mnet = preds_mnet / np.sum(preds_mnet)
         kelas_mnet = labels[np.argmax(probs_mnet)]
         conf_mnet = np.max(probs_mnet)
