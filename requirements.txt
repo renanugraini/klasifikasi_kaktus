@@ -1,4 +1,6 @@
-streamlit
+streamlit==1.52.2
+tensorflow==2.20.0
 numpy
 pillow
-tflite-runtime
+matplotlib
+reportlab
