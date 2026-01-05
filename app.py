@@ -166,7 +166,6 @@ def load_model(path):
 
 cnn_interpreter = load_model("cnn_kaktus.tflite")
 mobilenet_interpreter = load_model("mobilenetv2_kaktus.tflite")
-get_output_details()
 
 # label kelas
 labels = ["Astrophytum Asteria", "Ferocactus", "Gymnocalycium"]
@@ -187,7 +186,6 @@ def predict(img, interpreter):
     preds = interpreter.get_tensor(output_details[0]["index"])[0]
 
     return preds
-astype("float32")
 
 # =========================================================
 # HALAMAN MENU
@@ -246,11 +244,7 @@ elif menu == "Prediksi Kaktus":
 
     if uploaded:
         img = Image.open(uploaded).convert("RGB")
-
-        st.markdown("<h3 style='text-align:center;'>Gambar yang diupload</h3>", unsafe_allow_html=True)
-        st.image(img, width=280, caption="Preview", use_container_width=False)
-
-# Prediksi CNN
+        # Prediksi CNN
 preds_cnn = predict(img, cnn_interpreter)
 probs_cnn = preds_cnn / np.sum(preds_cnn)
 kelas_cnn = labels[np.argmax(probs_cnn)]
@@ -262,6 +256,8 @@ probs_mnet = preds_mnet / np.sum(preds_mnet)
 kelas_mnet = labels[np.argmax(probs_mnet)]
 conf_mnet = np.max(probs_mnet)
 
+        st.markdown("<h3 style='text-align:center;'>Gambar yang diupload</h3>", unsafe_allow_html=True)
+        st.image(img, width=280, caption="Preview", use_container_width=False)
 
       st.markdown(
     f"""
@@ -367,7 +363,9 @@ else:
 
         # ===== GRAFIK PROBABILITAS KE PDF =====
         fig2, ax2 = plt.subplots(figsize=(4,3))
-        ax2.bar(labels, probs)
+        ax.bar(labels, probs_cnn, alpha=0.7, label="CNN")
+        ax.bar(labels, probs_mnet, alpha=0.7, label="MobileNetV2")
+        ax.legend()
         ax2.set_ylim(0,1)
         ax2.set_ylabel("Probabilitas")
         ax2.set_title("Grafik Probabilitas Kelas")
