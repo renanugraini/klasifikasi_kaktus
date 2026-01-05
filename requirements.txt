@@ -1,6 +1,6 @@
 streamlit==1.52.2
-tensorflow==2.20.0
-numpy
+tensorflow-cpu==2.13.1
+numpy==1.26.4
 pillow
 matplotlib
 reportlab
