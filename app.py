@@ -192,7 +192,7 @@ else:
         c.setFont("Helvetica-Bold", 20)
         c.drawString(40, h - 50, "Hasil Prediksi Kaktus")
 
-         green_dark  = Color(0/255, 70/255, 32/255)
+        green_dark  = Color(0/255, 70/255, 32/255)
         green_main  = Color(56/255, 142/255, 60/255)
         green_light = Color(220/255, 240/255, 220/255)
 
