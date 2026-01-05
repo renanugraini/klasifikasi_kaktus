@@ -4,6 +4,13 @@ import numpy as np
 from PIL import Image
 import io
 import matplotlib.pyplot as plt
+import os
+
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+
+cnn_interpreter = load_model(os.path.join(BASE_DIR, "cnn_kaktus.tflite"))
+mobilenet_interpreter = load_model(os.path.join(BASE_DIR, "mobilenetv2_kaktus.tflite"))
+
 
 # =========================================================
 # PAGE CONFIG
@@ -56,8 +63,8 @@ def load_model(path):
     interpreter.allocate_tensors()
     return interpreter
 
-cnn_interpreter = load_model("modelcnn_kaktus.tflite")
-mobilenet_interpreter = load_model("mobilenetv2_kaktus.tflite")
+cnn_interpreter = load_model("models/cnn_kaktus.tflite")
+mobilenet_interpreter = load_model("models/mobilenetv2_kaktus.tflite")
 
 labels = ["Astrophytum Asteria", "Ferocactus", "Gymnocalycium"]
 
