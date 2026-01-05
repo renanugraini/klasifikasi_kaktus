@@ -327,7 +327,6 @@ conf_mnet = np.max(probs_mnet)
 
         c.drawImage(cactus_img, 60, height - 450, width=220, height=220)
 
-        # ===== Teks Hasil =====
        # ===== HASIL MODEL CNN =====
 c.setFillColor(green_dark)
 c.setFont("Helvetica-Bold", 20)
